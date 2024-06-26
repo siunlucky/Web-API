@@ -15,10 +15,32 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  email       String   @unique
+  firstName   String
+  lastName    String?
+  password    String
+  address     String?
+  profile_uri String?
+  role_id     String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model UserRole {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by String   @default("system")
+  updated_by String   @default("system")
+}
+
+model Setting {
+  id         String   @id @default(uuid())
+  logo_uri   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by String   @default("system")
+  updated_by String   @default("system")
 }

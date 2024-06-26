@@ -1,10 +1,10 @@
 const express = require('express')
-const home = require('./routes/home')
+const api = require('./app/routes/App.routes')
 
 const app = express()
 app.use(express.json())
 
-app.use('/home', home)
+app.use('/api/v1', api)
 
 const port = process.env.PORT || 3000
 
