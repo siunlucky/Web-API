@@ -1,6 +1,5 @@
 const express = require("express");
 
-const db = require("../../../config/db");
 const { findRoleById, findRoles, createRole, deleteRoleById } = require("../../../services/userRole.service");
 const { successResponse, createdResponse } = require("../../../utils/response");
 const { requiredUserRoleSchema } = require("../../../utils/schema");

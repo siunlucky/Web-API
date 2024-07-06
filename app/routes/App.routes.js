@@ -2,6 +2,7 @@ const express = require('express')
 
 const cmsRoutes = require("./CMS.routes")
 const authRoutes = require("./auth.routes")
+const publicRoutes = require("./public.routes")
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 })
 
 router.use('/cms', cmsRoutes)
+router.use('/public', publicRoutes)
 router.use('/auth', authRoutes)
-
 
 module.exports = router
