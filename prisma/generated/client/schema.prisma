@@ -16,7 +16,7 @@ datasource db {
 
 model User {
   id          String   @id @default(uuid())
-  email       String   @unique
+  email       String
   firstName   String
   lastName    String?
   password    String
@@ -25,6 +25,8 @@ model User {
   role_id     String
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
+
+  role UserRole @relation(fields: [role_id], references: [id])
 }
 
 model UserRole {
@@ -34,6 +36,8 @@ model UserRole {
   updated_at DateTime @updatedAt
   created_by String   @default("system")
   updated_by String   @default("system")
+
+  users User[]
 }
 
 model Setting {
