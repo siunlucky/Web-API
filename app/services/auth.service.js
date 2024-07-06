@@ -3,6 +3,7 @@ const db = require("../config/db");
 const { NotFoundError, ValidationError } = require("../utils/customError");
 const { jwtSign } = require("../utils/jwtTokenControl");
 const { findUserByEmailRole } = require("./user.service");
+const { findRoleById } = require("./userRole.service");
 
 const login = async (email, password, roleId) => {
     const user = await findUserByEmailRole(email, roleId);
@@ -13,10 +14,12 @@ const login = async (email, password, roleId) => {
         throw new NotFoundError("User not found");
     }
 
+    const role = await findRoleById(user.role_id);
+
     const payload = {
         id: user.id,
         email: user.email,
-        role_id: user.role_id
+        role: role.name,
     };
 
     const token = await jwtSign(payload);
@@ -55,10 +58,12 @@ const register = async (data) => {
         }
     });
 
+    const role = await findRoleById(data.role_id);
+
     const payload = {
         id: newUser.id,
         email: newUser.email,
-        role_id: newUser.role_id
+        role: role.name,
     };
 
     const token = await jwtSign(payload);

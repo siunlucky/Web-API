@@ -17,7 +17,7 @@ async function adminMiddleware(req, res, next) {
         const decoded = await jwtVerify(token.split(' ')[1], process.env.JWT_SECRET);
 
         if (decoded.role !== 'admin') {
-            throw new UnauthorizedError("Need seller role to access this route");
+            throw new UnauthorizedError("Need admin role to access this route");
         }
         req.userId = decoded.id;
         next();
