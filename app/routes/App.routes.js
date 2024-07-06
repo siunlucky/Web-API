@@ -1,7 +1,7 @@
 const express = require('express')
 
 const cmsRoutes = require("./CMS.routes")
-const authRoutes = require("./Auth.routes")
+const authRoutes = require("./auth.routes")
 
 const router = express.Router()
 
