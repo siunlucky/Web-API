@@ -22,12 +22,6 @@ router.get("/", async (req, res, next) => {
 
         let baseQuery = {
             where: {},
-            select: {
-                id: true,
-                name: true,
-                created_at: true,
-                updated_at: true,
-            },
             orderBy: {
                 created_at: "desc",
             }
@@ -75,7 +69,7 @@ router.delete("/", async (req, res, next) => {
 
         await deleteRoleById(id);
 
-        return successResponse(res, "Resource deleted successfully", 200, 0)
+        return successResponse(res, {"message" : "Resource deleted successfully"}, 200, 0)
     } catch (error) {
         next(error);
     }
