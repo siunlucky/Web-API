@@ -26,7 +26,8 @@ model User {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 
-  role UserRole @relation(fields: [role_id], references: [id])
+  role             UserRole         @relation(fields: [role_id], references: [id])
+  partner_services PartnerService[]
 }
 
 model UserRole {
@@ -47,4 +48,44 @@ model Setting {
   updated_at DateTime @updatedAt
   created_by String   @default("system")
   updated_by String   @default("system")
+}
+
+model Service {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  created_by String   @default("system")
+  updated_by String   @default("system")
+
+  details DetailService[]
+}
+
+model DetailService {
+  id          String   @id @default(uuid())
+  service_id  String
+  name        String
+  description String
+  price       Int
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  created_by  String   @default("system")
+  updated_by  String   @default("system")
+
+  service Service @relation(fields: [service_id], references: [id])
+
+  partners PartnerService[]
+}
+
+model PartnerService {
+  id                String   @id @default(uuid())
+  partner_id        String
+  detail_service_id String
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+  created_by        String   @default("system")
+  updated_by        String   @default("system")
+
+  partner        User          @relation(fields: [partner_id], references: [id])
+  detail_service DetailService @relation(fields: [detail_service_id], references: [id])
 }

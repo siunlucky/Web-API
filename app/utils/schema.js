@@ -28,6 +28,38 @@ const partialUserRoleSchema = Joi.object({
     }),
 });
 
+const requiredServiceRoleSchema = Joi.object({
+    name: Joi
+    .string()
+    .required()
+    .min(2)
+    .max(255)
+    .messages({
+        'string.base': `Name should be a type of 'text'`,
+        'string.empty': `Name cannot be an empty field`,
+        'string.min': `Name should have a minimum length of {#limit}`,
+        'string.max': `Name should have a maximum length of {#limit}`,
+        'any.required': `Name is a required field`
+    }),
+});
+
+const partialServiceRoleSchema = Joi.object({
+    name: Joi
+    .string()
+    .min(2)
+    .max(255)
+    .optional()
+    .messages({
+        'string.base': `Name should be a type of 'text'`,
+        'string.empty': `Name cannot be an empty field`,
+        'string.min': `Name should have a minimum length of {#limit}`,
+        'string.max': `Name should have a maximum length of {#limit}`,
+        'any.required': `Name is a required field`
+    }),
+})
+
+
+
 const requiredRegisterUserSchema = Joi.object({
     firstName: Joi
     .string()
@@ -90,5 +122,7 @@ const requiredRegisterUserSchema = Joi.object({
 module.exports = {
     requiredUserRoleSchema,
     partialUserRoleSchema,
-    requiredRegisterUserSchema
+    requiredRegisterUserSchema,
+    requiredServiceRoleSchema,
+    partialServiceRoleSchema
 }
